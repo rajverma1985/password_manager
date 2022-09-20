@@ -1,6 +1,6 @@
 
 class Passman:
-    """A sample Employee class"""
+    """ Password manager class for managing & saving password"""
 
     def __init__(self, username, email, website, password):
         self.username = username
