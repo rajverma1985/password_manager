@@ -1,10 +1,15 @@
-from flask_sqlalchemy import SQLAlchemy
 
-db = SQLAlchemy()
+class Passman:
+    """A sample Employee class"""
+
+    def __init__(self, username, email, website, password):
+        self.username = username
+        self.email = email
+        self.website = website
+        self.password = password
+
+    def __repr__(self):
+        return "Passman('{}', '{}', {}, {})".format(self.username, self.email, self.website, self.password)
 
 
-class Creds(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    website = db.Column(db.String, nullable=False)
-    email = db.Column(db.String)
-    password = db.Column(db.String)
+
