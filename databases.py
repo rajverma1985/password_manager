@@ -1,4 +1,3 @@
-from models import Passman
 import sqlite3
 
 conn = sqlite3.connect("pass_man.db")
@@ -6,20 +5,19 @@ cursor = conn.cursor()
 
 cursor.execute("""CREATE TABLE IF NOT EXISTS passman_table (
             id INTEGER PRIMARY KEY,
-            user TEXT,
             email TEXT,
             website TEXT,
             password TEXT
             )""")
 
 
-def insert(obj):
+def insert_info(obj):
     with conn:
-        cursor.execute(f"INSERT INTO passman_table (user, email, website) "
-                       f"VALUES ('{obj.username}', '{obj.email}', '{obj.website}')")
+        cursor.execute(f"INSERT INTO passman_table (email, website, password) "
+                       f"VALUES ('{obj.email}', '{obj.website}', '{obj.password}')")
 
 
-new = Passman('testuser', 'testemail@gmail.com', 'www.testwebsite.org', 'tespassword')
+# new = Passman('testuser', 'testemail@gmail.com', 'www.testwebsite.org', 'tespassword')
 
 
 def get_info(username):
@@ -27,7 +25,7 @@ def get_info(username):
     return cursor.fetchall()
 
 
-def update_pay(obj, password):
+def update_info(obj, password):
     with conn:
         cursor.execute("""UPDATE passman_table SET pay = :pay
                     WHERE first = :first AND last = :last""",
@@ -36,11 +34,9 @@ def update_pay(obj, password):
 
 #
 #
-def remove_emp(obj):
+def remove_info(obj):
     with conn:
         cursor.execute("DELETE from passman_table WHERE user = :user AND email = :email",
                        {'user': obj.username, 'email': obj.email})
 
-
-insert(new)
 # remove_emp(new)
