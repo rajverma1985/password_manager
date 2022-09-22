@@ -27,8 +27,8 @@ password_l = Label(font=("Arial", 12, "bold"), text="Password")
 password_l.grid(column=0, row=3)
 
 # all entries here
-website_entry = Entry(width=35)
-website_entry.grid(column=1, row=1, columnspan=2)
+website_entry = Entry(width=21)
+website_entry.grid(column=1, row=1)
 email_entry = Entry(width=35)
 email_entry.grid(column=1, row=2, columnspan=2)
 pass_entry = Entry(width=21)
@@ -56,7 +56,21 @@ def save_password():
         pass_entry.delete(0, END)
 
 
+def search():
+    information = get_info(website_entry.get())
+    if len(website_entry.get()) == 0:
+        messagebox.showinfo(title="Blank Search", message="Blank Search")
+    elif len(information) == 0:
+        messagebox.showinfo(title="Blank Search", message="No results found!")
+    else:
+        for i in range(0, len(information)):
+            messagebox.showinfo(title="Results",
+                                message=f"Your info from {information[i][2]} is\n email:{information[i][1]}\n password:{information[i][-1]}\n")
+
+
 # buttons
+search_button = Button(text="Search", width=13, command=search)
+search_button.grid(row=1, column=2)
 genpass_button = Button(text="Generate Password", command=generator)
 genpass_button.grid(row=3, column=2)
 add_button = Button(text="Add", width=36, command=save_password)

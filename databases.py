@@ -20,8 +20,8 @@ def insert_info(obj):
 # new = Passman('testuser', 'testemail@gmail.com', 'www.testwebsite.org', 'tespassword')
 
 
-def get_info(username):
-    cursor.execute("SELECT * FROM passman_table WHERE username=:user", {'user': username})
+def get_info(info):
+    cursor.execute("SELECT * FROM passman_table WHERE website LIKE :info_search", {'info_search': f'{info}%'})
     return cursor.fetchall()
 
 
