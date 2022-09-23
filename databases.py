@@ -17,9 +17,6 @@ def insert_info(obj):
                        f"VALUES ('{obj.email}', '{obj.website}', '{obj.password}')")
 
 
-# new = Passman('testuser', 'testemail@gmail.com', 'www.testwebsite.org', 'tespassword')
-
-
 def get_info(info):
     cursor.execute("SELECT * FROM passman_table WHERE website LIKE :info_search", {'info_search': f'{info}%'})
     return cursor.fetchall()
@@ -32,11 +29,7 @@ def update_info(obj, password):
                        {'user': obj.username, 'email': obj.email, 'password': password})
 
 
-#
-#
 def remove_info(obj):
     with conn:
         cursor.execute("DELETE from passman_table WHERE user = :user AND email = :email",
                        {'user': obj.username, 'email': obj.email})
-
-# remove_emp(new)

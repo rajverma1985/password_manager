@@ -2,7 +2,9 @@ from tkinter import messagebox
 from tkinter import *
 from password_generator import gen_pass
 from models import Passman
-from databases import insert_info, get_info, remove_info, update_info
+from databases import insert_info, get_info
+from tkinter import ttk
+# import pyperclip   >>> ADD copy functionality to the app
 
 PINK = "#e2979c"
 RED = "#e7305b"
@@ -12,6 +14,7 @@ YELLOW = "#f7f5dd"
 # base windows for the app
 window = Tk()
 window.title("Password Manager")
+# window.resizable(False, False)
 window.config(padx=20, pady=20)
 canvas = Canvas(width=200, height=200, highlightthickness=0)
 password_image = PhotoImage(file="pass_lock.png")
@@ -66,11 +69,42 @@ def search():
     else:
         for i in range(0, len(information)):
             messagebox.showinfo(title="Results",
-                                message=f"Your info from {information[i][2]} is\n email:{information[i][1]}\n password:{information[i][-1]}\n")
+                                message=f"Your info from {information[i][2]} is\n "
+                                        f"email:{information[i][1]}\n password:{information[i][-1]}\n")
+
+
+def table_create():
+    table_frame = Frame(window)
+    table_frame.grid(row=0, column=3)
+    table = ttk.Treeview(table_frame)
+    table['columns'] = ('id', 'email', 'website', 'password')
+
+    table.column("#0", width=0, stretch=NO)
+    table.column("id", anchor=CENTER, width=20, )
+    table.column("email", anchor=CENTER, width=80)
+    table.column("website", anchor=CENTER, width=100)
+    table.column("password", anchor=CENTER, width=80)
+
+    table.heading("#0", text="", anchor=CENTER)
+    table.heading("id", text="ID", anchor=CENTER)
+    table.heading("email", text="Email/UserName", anchor=CENTER)
+    table.heading("website", text="Website", anchor=CENTER)
+    table.heading("password", text="Password", anchor=CENTER)
+    information = get_info(website_entry.get())
+    if len(website_entry.get()) == 0:
+        messagebox.showinfo(title="Blank Search", message="Blank Search")
+    elif len(information) == 0:
+        messagebox.showinfo(title="No results", message="No results found!")
+    else:
+        for i in range(0, len(information)):
+            table.insert(parent='', index='end', iid=f'{i}', text='',
+                         values=(f'{information[i][0]}', f'{information[i][1]}', f'{information[i][2]}',
+                                 f'{information[i][3]}'))
+    table.grid(row=0, column=5)
 
 
 # buttons
-search_button = Button(text="Search", width=13, command=search)
+search_button = Button(text="Search", width=13, command=table_create)
 search_button.grid(row=1, column=2)
 genpass_button = Button(text="Generate Password", command=generator)
 genpass_button.grid(row=3, column=2)
