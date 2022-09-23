@@ -1,6 +1,9 @@
 import sqlite3
+from os import path
 
-conn = sqlite3.connect("pass_man.db")
+proj_dir = path.abspath(path.dirname(__file__))
+path_to_db = path.join(proj_dir, '../pass_man.db')
+conn = sqlite3.connect(path_to_db)
 cursor = conn.cursor()
 
 cursor.execute("""CREATE TABLE IF NOT EXISTS passman_table (

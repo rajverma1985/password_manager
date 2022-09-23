@@ -1,11 +1,11 @@
 from tkinter import messagebox
 from tkinter import *
-from password_generator import gen_pass
-from models import Passman
-from databases import insert_info, get_info
+from password.password_generator import gen_pass
+from db.models import Passman
+from db.databases import insert_info, get_info
 from tkinter import ttk
-# import pyperclip   >>> ADD copy functionality to the app
 
+# import pyperclip   >>> ADD copy functionality to the app
 PINK = "#e2979c"
 RED = "#e7305b"
 GREEN = "#9bdeac"
