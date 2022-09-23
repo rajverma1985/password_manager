@@ -37,10 +37,11 @@ pass_entry.grid(row=3, column=1)
 
 # main functionality
 def generator():
+    pass_entry.delete(0, END)
     pass_entry.insert(0, gen_pass())
 
 
-def save_password():
+def save_info():
     # get all the data from the entry fields first
     website = website_entry.get()
     password = pass_entry.get()
@@ -73,7 +74,7 @@ search_button = Button(text="Search", width=13, command=search)
 search_button.grid(row=1, column=2)
 genpass_button = Button(text="Generate Password", command=generator)
 genpass_button.grid(row=3, column=2)
-add_button = Button(text="Add", width=36, command=save_password)
+add_button = Button(text="Add", width=36, command=save_info)
 add_button.grid(row=4, column=1, columnspan=2)
 
 # main loop to run the app
