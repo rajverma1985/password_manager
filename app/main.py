@@ -4,21 +4,20 @@ from password.password_generator import gen_pass
 from db.models import Passman
 from db.databases import insert_info, get_info
 from tkinter import ttk
+from PIL import ImageTk, Image
 
 # import pyperclip   >>> ADD copy functionality to the app
-PINK = "#e2979c"
-RED = "#e7305b"
-GREEN = "#9bdeac"
-YELLOW = "#f7f5dd"
+
 
 # base windows for the app
 window = Tk()
 window.title("Password Manager")
-# window.resizable(False, False)
+window.resizable(False, False)
 window.config(padx=20, pady=20)
+img = PhotoImage(file="images/pass_lock.png")
+# password_image = PhotoImage(file="pass_lock.png")
 canvas = Canvas(width=200, height=200, highlightthickness=0)
-password_image = PhotoImage(file="pass_lock.png")
-canvas.create_image(100, 100, image=password_image)
+canvas.create_image(100, 100, image=img)
 canvas.grid(row=0, column=1)
 
 # label designs
@@ -32,7 +31,7 @@ password_l.grid(column=0, row=3)
 # all entries here
 website_entry = Entry(width=21)
 website_entry.grid(column=1, row=1)
-email_entry = Entry(width=35)
+email_entry = Entry(width=39)
 email_entry.grid(column=1, row=2, columnspan=2)
 pass_entry = Entry(width=21)
 pass_entry.grid(row=3, column=1)
@@ -80,7 +79,7 @@ def table_create():
     table['columns'] = ('id', 'email', 'website', 'password')
 
     table.column("#0", width=0, stretch=NO)
-    table.column("id", anchor=CENTER, width=20, )
+    table.column("id", anchor=CENTER, width=20)
     table.column("email", anchor=CENTER, width=80)
     table.column("website", anchor=CENTER, width=100)
     table.column("password", anchor=CENTER, width=80)
