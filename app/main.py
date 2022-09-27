@@ -1,3 +1,5 @@
+## TODO >> modify passwords, delete passwords
+
 from tkinter import messagebox
 from tkinter import *
 from password.password_generator import gen_pass
